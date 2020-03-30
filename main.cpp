@@ -17,7 +17,8 @@ int main()
         f >> x >> y;
         g.add_muchie(x,y);
     }
-    //g.BFS();
+    g.BFS(nod);
+    g.DFS(nod);
     //graf a(n+1);
     graf a(3);
     a=g;
