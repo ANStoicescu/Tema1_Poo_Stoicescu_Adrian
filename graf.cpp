@@ -8,6 +8,10 @@ graf::graf(int nr_noduri)
     mat_ = new int*[size_];
     for (int i = 0; i < size_; ++i)
         mat_ [i] = new int[size_];
+    for(int i=0; i<size_; i++)
+        for(int j=0; j<size_; j++)
+            mat_[i][j]=0;
+
 }
 
 graf::graf(const graf& other)
@@ -101,7 +105,8 @@ void graf::DFS(int nod)
             viz[j] = 1;
             cout << j << ' ';
         }
-        else vf--;
+        else
+            vf--;
     }
     cout<<'\n';
     delete [] S;
@@ -126,6 +131,18 @@ graf& graf::operator=(const graf& other)
     }
 }
 
+graf graf::operator+(const graf &other) const
+{
+    if(size_==other.size_)
+    {
+        graf result(size_);
+        for (int i = 0; i < size_; i++)
+            for(int j = 0; j < size_; j++)
+                result.mat_[i][j]=mat_[i][j]|other.mat_[i][j];
+        return result;
+    }
+}
+
 void graf::add_muchie(int x, int y)
 {
     mat_ [x][y]=mat_ [y][x]=1;
@@ -134,7 +151,7 @@ void graf::add_muchie(int x, int y)
 std::ostream& operator<<(std::ostream& out, const graf& g)
 {
     for (int i = 1; i < g.size_; i++)
-        for (int j = 1; j < g.size_; j++)
+        for (int j = i; j < g.size_; j++)
             if(g.mat_[i][j]==1)
                 out<<i<<' '<<j<<'\n';
     return out;

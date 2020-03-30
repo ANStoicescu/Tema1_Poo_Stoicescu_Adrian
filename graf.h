@@ -14,6 +14,7 @@ public:
     void BFS(int nod);
     void DFS(int nod);
     virtual ~graf();
+    graf operator+(const graf& other) const;
     graf& operator=(const graf& other);
     friend std::ostream& operator<<(std::ostream&, const graf&);
 

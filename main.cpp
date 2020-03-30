@@ -9,6 +9,8 @@ int *v;
 int main()
 {
     f>>n>>m>>nod;
+    //n= nr de noduri ale grafului
+    //m= nr de muchii ale grafului
     n++;
     graf g(n);
     for(int i = 1; i <= m; i++)
@@ -20,10 +22,17 @@ int main()
     g.BFS(nod);
     g.DFS(nod);
     //graf a(n+1);
-    graf a(3);
-    a=g;
+
+    graf a(n);
+    a.add_muchie(5,2);
     cout<<g;
+    cout<<endl;
     cout<<a;
+    cout<<endl;
+    graf b(n);
+    b=a+g;
+    cout<<b;
+    cout<<endl;
     //g.BFS(v);
     return 0;
 }
