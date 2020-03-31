@@ -104,6 +104,42 @@ void graf::DFS(int nod)
     delete [] viz;
 }
 
+int graf::distanta(int x,int y)
+{
+    int* C;
+    int* viz;
+    int* dist;
+    C= new int [size_];
+    viz= new int [size_];
+    dist= new int [size_];
+    for(int i=0; i<size_; i++)
+    {
+        C[i]=0;
+        viz[i]=0;
+        dist[i]=0;
+    }
+    int p = 1;
+    int u = 1;
+    C[1] = x;
+    viz[x] = 1;
+    while(p <= u)
+    {
+        int crt = C[p++];
+        for(int j = 1; j <= size_; j++)
+            if(mat_[crt][j] == 1 && viz[j] == 0)
+            {
+                dist[j]=dist[crt]+1;
+                C[++u] = j;
+                viz[j] = 1;
+            }
+    }
+    int rez=dist[y];
+    delete [] C;
+    delete [] viz;
+    delete [] dist;
+    return rez;
+}
+
 int graf::nr_noduri()
 {
     return size_-1;
@@ -112,7 +148,7 @@ int graf::nr_noduri()
 int graf::nr_muchii()
 {
     int rez=0;
-     for (int i = 1; i < size_; i++)
+    for (int i = 1; i < size_; i++)
         for (int j = i; j < size_; j++)
             if(mat_[i][j]==1)
                 rez++;
@@ -139,7 +175,7 @@ graf& graf::operator=(const graf& other)
 
 void graf::afis_lista_adiacenta_nod(const int nod)
 {
-    for(int i = 1;i<size_;i++)
+    for(int i = 1; i<size_; i++)
         if(mat_[i][nod]==1)
             cout<<i<<' ';
     cout<<endl;

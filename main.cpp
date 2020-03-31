@@ -22,11 +22,13 @@ int main()
 
     g.BFS(nod);
     g.DFS(nod);
+
+    cout<<g.distanta(1,3)<<endl;
     //graf a(n+1);
     cout<<g.nr_noduri()<<endl;
     cout<<g.nr_muchii()<<endl;
     g.afis_lista_adiacenta_nod(3);
-
+    cout<<endl;
     graf a(n);
     a.add_muchie(5,2);
     cout<<g;

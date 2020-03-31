@@ -13,6 +13,7 @@ public:
     void add_muchie(int x, int y);
     void BFS(int nod);
     void DFS(int nod);
+    int distanta(int x,int y);
     void afis_lista_adiacenta_nod(const int nod);
     int nr_noduri();
     int nr_muchii();
