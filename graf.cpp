@@ -113,6 +113,21 @@ void graf::DFS(int nod)
     delete [] viz;
 }
 
+int graf::nr_noduri()
+{
+    return size_-1;
+}
+
+int graf::nr_muchii()
+{
+    int rez=0;
+     for (int i = 1; i < size_; i++)
+        for (int j = i; j < size_; j++)
+            if(mat_[i][j]==1)
+                rez++;
+    return rez;
+}
+
 graf& graf::operator=(const graf& other)
 {
     if (size_ <= 0)
@@ -131,7 +146,12 @@ graf& graf::operator=(const graf& other)
     }
 }
 
-graf graf::operator+(const graf &other) const
+graf graf::operator-(const int nod)
+{
+    //mat_ [x][y]=mat_ [y][x]=0;
+}
+
+graf graf::operator+(const graf &other)
 {
     if(size_==other.size_)
     {

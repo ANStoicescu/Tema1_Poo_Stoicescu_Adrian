@@ -19,9 +19,12 @@ int main()
         f >> x >> y;
         g.add_muchie(x,y);
     }
+
     g.BFS(nod);
     g.DFS(nod);
     //graf a(n+1);
+    cout<<g.nr_noduri()<<endl;
+    cout<<g.nr_muchii()<<endl;
 
     graf a(n);
     a.add_muchie(5,2);

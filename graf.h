@@ -13,8 +13,11 @@ public:
     void add_muchie(int x, int y);
     void BFS(int nod);
     void DFS(int nod);
+    int nr_noduri();
+    int nr_muchii();
     virtual ~graf();
-    graf operator+(const graf& other) const;
+    graf operator+(const graf& other);
+    graf operator-(const int nod);
     graf& operator=(const graf& other);
     friend std::ostream& operator<<(std::ostream&, const graf&);
 
