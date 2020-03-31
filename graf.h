@@ -18,6 +18,7 @@ public:
     virtual ~graf();
     graf operator+(const graf& other);
     graf operator-(const int nod);
+    bool arbore();
     bool conex();
     int nr_noduri();
     int nr_muchii();

@@ -168,7 +168,18 @@ void graf::afis_lista_adiacenta_nod(const int nod)
 
 graf graf::operator-(const int nod)
 {
-    //mat_ [x][y]=mat_ [y][x]=0;
+    graf result(size_-1);
+    for (int i = 0; i < size_; i++)
+        for(int j = 0; j < size_; j++)
+            {
+                if(i==nod)break;//daca suntem pe linia sau coloana nodului pe care il eliminam iesim din for
+                if(j==nod)continue;
+                int ii=i,jj=j;
+                if(i>nod)ii--;//toate nodurile de ordin mai mare decat nodul pe care il eliminam vor primi un ordin mai mic cu 1
+                if(j>nod)jj--;
+                result.mat_[ii][jj]=mat_[i][j];
+            }
+    return result;
 }
 
 graf graf::operator+(const graf &other)
@@ -222,6 +233,11 @@ bool graf::conex() // este acelasi algoritm ca la cel de distanta doar ca daca d
     delete [] viz;
     delete [] dist;
     return conex;
+}
+
+bool graf::arbore()
+{
+
 }
 
 int graf::nr_noduri()

@@ -23,7 +23,7 @@ int main()
     g.BFS(nod);
     g.DFS(nod);
 
-    cout<<g.distanta(1,1)<<endl;
+    cout<<g.distanta(1,4)<<endl;
     //graf a(n+1);
     cout<<g.nr_noduri()<<endl;
     cout<<g.nr_muchii()<<endl;
@@ -39,7 +39,9 @@ int main()
     b=a+g;
     cout<<b;
     cout<<endl;
-
+    b=g-3;
+    cout<<b;
+    cout<<endl;
     cout<<g.conex()<<endl;
     //g.BFS(v);
     return 0;
