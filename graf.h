@@ -15,11 +15,12 @@ public:
     void DFS(int nod);
     int distanta(int x,int y);
     void afis_lista_adiacenta_nod(const int nod);
-    int nr_noduri();
-    int nr_muchii();
     virtual ~graf();
     graf operator+(const graf& other);
     graf operator-(const int nod);
+    bool conex();
+    int nr_noduri();
+    int nr_muchii();
     graf& operator=(const graf& other);
     friend std::ostream& operator<<(std::ostream&, const graf&);
 

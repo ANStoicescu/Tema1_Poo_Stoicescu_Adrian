@@ -140,21 +140,6 @@ int graf::distanta(int x,int y)
     return rez;
 }
 
-int graf::nr_noduri()
-{
-    return size_-1;
-}
-
-int graf::nr_muchii()
-{
-    int rez=0;
-    for (int i = 1; i < size_; i++)
-        for (int j = i; j < size_; j++)
-            if(mat_[i][j]==1)
-                rez++;
-    return rez;
-}
-
 graf& graf::operator=(const graf& other)
 {
     if (size_ <= 0)
@@ -197,6 +182,63 @@ graf graf::operator+(const graf &other)
         return result;
     }
 }
+
+bool graf::conex() // este acelasi algoritm ca la cel de distanta doar ca daca de la nodul unu nu putem ajunge la toate nodurile rezulta ca graful nu este conex
+{
+    int* C;
+    int* viz;
+    int* dist;
+    int x=1;
+    C= new int [size_];
+    viz= new int [size_];
+    dist= new int [size_];
+    for(int i=0; i<size_; i++)
+    {
+        C[i]=0;
+        viz[i]=0;
+        dist[i]=0;
+    }
+    int p = 1;
+    int u = 1;
+    C[1] = x;
+    viz[x] = 1;
+    while(p <= u)
+    {
+        int crt = C[p++];
+        for(int j = 1; j <= size_; j++)
+            if(mat_[crt][j] == 1 && viz[j] == 0)
+            {
+                dist[j]=dist[crt]+1;
+                C[++u] = j;
+                viz[j] = 1;
+            }
+    }
+    bool conex=1;
+    for(int i=2;i<size_;i++)
+    {
+        if(dist[i]==0)conex=0;
+    }
+    delete [] C;
+    delete [] viz;
+    delete [] dist;
+    return conex;
+}
+
+int graf::nr_noduri()
+{
+    return size_-1;
+}
+
+int graf::nr_muchii()
+{
+    int rez=0;
+    for (int i = 1; i < size_; i++)
+        for (int j = i; j < size_; j++)
+            if(mat_[i][j]==1)
+                rez++;
+    return rez;
+}
+
 
 void graf::add_muchie(int x, int y)
 {
