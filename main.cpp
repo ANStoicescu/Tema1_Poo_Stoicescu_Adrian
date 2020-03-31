@@ -25,6 +25,7 @@ int main()
     //graf a(n+1);
     cout<<g.nr_noduri()<<endl;
     cout<<g.nr_muchii()<<endl;
+    g.afis_lista_adiacenta_nod(3);
 
     graf a(n);
     a.add_muchie(5,2);

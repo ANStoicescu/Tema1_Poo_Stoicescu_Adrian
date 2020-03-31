@@ -32,15 +32,6 @@ graf::graf(const graf& other)
     }
 }
 
-graf::~graf()
-{
-    for (int i = 0; i < size_; ++i)
-        delete [] mat_[i];
-    delete [] mat_;
-    size_=0;
-}
-
-
 void graf::BFS(int nod)
 {
     int* C;
@@ -146,6 +137,14 @@ graf& graf::operator=(const graf& other)
     }
 }
 
+void graf::afis_lista_adiacenta_nod(const int nod)
+{
+    for(int i = 1;i<size_;i++)
+        if(mat_[i][nod]==1)
+            cout<<i<<' ';
+    cout<<endl;
+}
+
 graf graf::operator-(const int nod)
 {
     //mat_ [x][y]=mat_ [y][x]=0;
@@ -177,3 +176,10 @@ std::ostream& operator<<(std::ostream& out, const graf& g)
     return out;
 }
 
+graf::~graf()
+{
+    for (int i = 0; i < size_; ++i)
+        delete [] mat_[i];
+    delete [] mat_;
+    size_=0;
+}
