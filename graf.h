@@ -27,6 +27,4 @@ public:
 
 };
 
-
-
 #endif // GRAF_H

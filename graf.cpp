@@ -171,14 +171,18 @@ graf graf::operator-(const int nod)
     graf result(size_-1);
     for (int i = 0; i < size_; i++)
         for(int j = 0; j < size_; j++)
-            {
-                if(i==nod)break;//daca suntem pe linia sau coloana nodului pe care il eliminam iesim din for
-                if(j==nod)continue;
-                int ii=i,jj=j;
-                if(i>nod)ii--;//toate nodurile de ordin mai mare decat nodul pe care il eliminam vor primi un ordin mai mic cu 1
-                if(j>nod)jj--;
-                result.mat_[ii][jj]=mat_[i][j];
-            }
+        {
+            if(i==nod)
+                break;//daca suntem pe linia sau coloana nodului pe care il eliminam iesim din for
+            if(j==nod)
+                continue;
+            int ii=i,jj=j;
+            if(i>nod)
+                ii--;//toate nodurile de ordin mai mare decat nodul pe care il eliminam vor primi un ordin mai mic cu 1
+            if(j>nod)
+                jj--;
+            result.mat_[ii][jj]=mat_[i][j];
+        }
     return result;
 }
 
@@ -225,9 +229,10 @@ bool graf::conex() // este acelasi algoritm ca la cel de distanta doar ca daca d
             }
     }
     bool conex=1;
-    for(int i=2;i<size_;i++)
+    for(int i=2; i<size_; i++)
     {
-        if(dist[i]==0)conex=0;
+        if(dist[i]==0)
+            conex=0;
     }
     delete [] C;
     delete [] viz;
@@ -235,9 +240,45 @@ bool graf::conex() // este acelasi algoritm ca la cel de distanta doar ca daca d
     return conex;
 }
 
+bool este_ciclu(int u, bool visited[], int parent,int size_,int** mat_)
+{
+    visited[u] = true;
+    for(int i = 1; i<size_; i++)
+    {
+        if(mat_[u][i])
+        {
+            if(!visited[i])
+            {
+                if(este_ciclu(i, visited, u, size_, mat_))// daca am gasit un ciclu nu mai mergem mai departe
+                {
+                    return true;
+                }
+            }
+            else if(i != parent)        //cand nodul curent e vizitat dar nu parintele
+            {
+                return true;    //avem un ciclu
+            }
+        }
+    }
+    return false;
+}
+
 bool graf::arbore()
 {
+    bool *viz = new bool[size_];
 
+    for(int i = 0; i<size_; i++)
+        viz[i] = 0;
+
+    if(este_ciclu(1, viz, -1, size_, mat_))    //verificam daca avem un ciclu
+        return false;
+
+    for(int i = 1; i<size_; i++)
+    {
+        if(!viz[i])    //daca avem un nod care nu a fost vizitat atunci nu e arbore
+            return false;
+    }
+    return true;
 }
 
 int graf::nr_noduri()
