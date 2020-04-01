@@ -2,7 +2,7 @@
 
 using namespace std;
 
-graf::graf(int nr_noduri)
+graf::graf(int nr_noduri)// acest constructor se apeleaza atunci cand avem doar numarul de noduri. Initializam o matrice de adiacenta plina de 0
 {
     size_=nr_noduri;
     mat_ = new int*[size_];
@@ -14,7 +14,7 @@ graf::graf(int nr_noduri)
 
 }
 
-graf::graf(const graf& other)
+graf::graf(const graf& other)// acest constructor se apeleaza atunci cand avem un graf pe care vrem sa il initializam si copiem intr-un graf nou
 {
     if (size_ <= 0)
     {
@@ -32,7 +32,13 @@ graf::graf(const graf& other)
     }
 }
 
-void graf::BFS(int nod)
+void graf::add_muchie(int x, int y)
+{
+    mat_ [x][y]=mat_ [y][x]=1;
+}
+
+// functiile BFS si DFS nu returneaza nimic, ele afiseaza rezultatul direct pe ecran
+void graf::BFS(int nod)// parcurgerea in latime
 {
     int* C;
     int* viz;
@@ -65,7 +71,7 @@ void graf::BFS(int nod)
     delete [] viz;
 }
 
-void graf::DFS(int nod)
+void graf::DFS(int nod)// parcurgerea in adancime
 {
     int* S;
     int* viz;
@@ -104,8 +110,8 @@ void graf::DFS(int nod)
     delete [] viz;
 }
 
-int graf::distanta(int x,int y)
-{
+int graf::distanta(int x,int y)// ca sa calculez distanta am folosit un BFS care retine in vectorul dist toate distantele de la nodul x la celelalte noduri
+{//functia returneaza distanta dintre nodul x si nodul y
     int* C;
     int* viz;
     int* dist;
@@ -141,7 +147,7 @@ int graf::distanta(int x,int y)
 }
 
 graf& graf::operator=(const graf& other)
-{
+{//am supraincarcat operatorul '=' sa copieze matricea si dimensiunea unui graf in alt graf
     if (size_ <= 0)
     {
         mat_ = NULL;
@@ -161,7 +167,7 @@ graf& graf::operator=(const graf& other)
 void graf::afis_lista_adiacenta_nod(const int nod)
 {
     for(int i = 1; i<size_; i++)
-        if(mat_[i][nod]==1)
+        if(mat_[i][nod]==1)//acolo unde avem 1 in matriccea de adiacenta pe linia lui nod afisam acel i
             cout<<i<<' ';
     cout<<endl;
 }
@@ -196,6 +202,7 @@ graf graf::operator+(const graf &other)
                 result.mat_[i][j]=mat_[i][j]|other.mat_[i][j];
         return result;
     }
+
 }
 
 bool graf::conex() // este acelasi algoritm ca la cel de distanta doar ca daca de la nodul unu nu putem ajunge la toate nodurile rezulta ca graful nu este conex
@@ -287,7 +294,7 @@ int graf::nr_noduri()
 }
 
 int graf::nr_muchii()
-{
+{// numaram cati de 1 avem in matricea de adiacenta, desupra diagonalei principale deoarece este un graf neorientat
     int rez=0;
     for (int i = 1; i < size_; i++)
         for (int j = i; j < size_; j++)
@@ -296,14 +303,8 @@ int graf::nr_muchii()
     return rez;
 }
 
-
-void graf::add_muchie(int x, int y)
-{
-    mat_ [x][y]=mat_ [y][x]=1;
-}
-
 std::ostream& operator<<(std::ostream& out, const graf& g)
-{
+{// vom afisa doar muchhile deasupra diagonalei principale deoarece este un graf neorientat
     for (int i = 1; i < g.size_; i++)
         for (int j = i; j < g.size_; j++)
             if(g.mat_[i][j]==1)
@@ -311,7 +312,7 @@ std::ostream& operator<<(std::ostream& out, const graf& g)
     return out;
 }
 
-graf::~graf()
+graf::~graf()//destructor
 {
     for (int i = 0; i < size_; ++i)
         delete [] mat_[i];

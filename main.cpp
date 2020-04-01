@@ -25,10 +25,11 @@ int main()
 
     cout<<g.distanta(1,4)<<endl;
     //graf a(n+1);
-    g.afis_lista_adiacenta_nod(3);
+    g.afis_lista_adiacenta_nod(nod);
     cout<<endl;
     graf a(n);
     a.add_muchie(5,2);
+    a.add_muchie(1,4);
     cout<<g;
     cout<<endl;
     cout<<a;
@@ -37,13 +38,20 @@ int main()
     b=a+g;
     cout<<b;
     cout<<endl;
-    b=g-3;
+    b=b-3;
     cout<<b;
     cout<<endl;
     cout<<g.conex()<<endl;
+    cout<<a.conex()<<endl;
     cout<<g.arbore()<<endl;
-    cout<<g.nr_noduri()<<endl;
-    cout<<g.nr_muchii()<<endl;
+    graf arb(n);
+    arb.add_muchie(1,2);
+    arb.add_muchie(1,3);
+    arb.add_muchie(2,4);
+    arb.add_muchie(4,5);
+    cout<<arb.arbore()<<endl;
+    cout<<b.nr_noduri()<<endl;
+    cout<<b.nr_muchii()<<endl;
     //g.BFS(v);
     return 0;
 }

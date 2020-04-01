@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1585742015 source:c:\users\adi\desktop\poo\graf\graf.cpp
+1585746466 source:c:\users\adi\desktop\poo\graf\graf.cpp
 	"graf.h"
 
 1585678594 c:\users\adi\desktop\poo\graf\graf.h
 	<iostream>
 
-1585678642 source:c:\users\adi\desktop\poo\graf\main.cpp
+1585746266 source:c:\users\adi\desktop\poo\graf\main.cpp
 	<iostream>
 	<fstream>
 	"graf.h"
